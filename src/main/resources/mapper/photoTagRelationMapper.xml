@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhitu.dao.mapper.PhotoTagRelationMapper">
+
+   <!-- <cache type="com.zhitu.dao.config.RedisConfig"/>  -->
+
+    <insert id="insert">
+        insert into photo_tag_relation (photo_id,tag_id,score) values (#{photoId},#{tagId},#{score})
+    </insert>
+
+    <select id="selectPhotoIdByTagIdOrderByScoreDesc" resultType="INTEGER" parameterType="java.util.List">
+        select photo_id from photo_tag_relation where tag_id in
+        <foreach collection="list" item="tagId" open="(" close=")" separator=",">
+            #{tagId}
+        </foreach>
+        order by score desc
+    </select>
+
+    <select id="selectAllRelationIdByPhotoId" resultType="Long">
+        select relation_id from photo_tag_relation where photo_id=#{photoId}
+    </select>
+
+    <delete id="deleteByRelationId">
+        delete from photo_tag_relation where relation_id=#{relationId}
+    </delete>
+
+    <select id="selectTagIdByPhotoId" resultType="INTEGER">
+        select tag_id from photo_tag_relation where photo_id=#{photoId}
+    </select>
+
+    <select id="selectExistByPhotoIdAndTagId" resultType="INTEGER">
+        select 1 from photo_tag_relation where photo_id=#{photoId} and tag_id=#{tagId} limit 1
+    </select>
+
+    <select id="selectRelationIdByPhotoIdAndTagId" resultType="Long">
+        select relation_id from photo_tag_relation where photo_id=#{photoId} and tag_id=#{tagId} limit 1
+    </select>
+</mapper>

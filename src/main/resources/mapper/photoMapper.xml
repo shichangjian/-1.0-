@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhitu.dao.mapper.PhotoMapper">
+
+    <insert id="insert" parameterType="com.zhitu.entity.Photo">
+        insert into photo (name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time)
+         VALUES (#{name},#{suffix},#{path},#{thumbnailPath},#{description},#{information},#{userId},#{albumId},#{likes},#{isPublic},#{size},#{width},#{height},#{inRecycleBin},#{originalTime},#{uploadTime},#{deleteTime})
+    </insert>
+
+    <select id="selectAllByPhotoId" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+        from photo where photo_id=#{photoId}
+    </select>
+
+    <select id="selectAllByPhotoIdWhereIsPublic" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+        from photo where photo_id=#{photoId} and is_public=1
+    </select>
+
+    <select id="selectPhotoIdByAlbumId" resultType="INTEGER">
+        select photo_id from photo where album_id=#{albumId}
+    </select>
+    
+    <update id="updateAlbumIdByPhotoId">
+        update photo set album_id=#{albumId} where photo_id=#{photoId}
+    </update>
+
+    <update id="moveToRecycleBinByPhotoId">
+        update photo set in_recycle_bin=1,delete_time=#{time} where photo_id=#{photoId}
+    </update>
+
+    <update id="updateByPhotoId">
+        update photo set name=#{name},description=#{description},is_public=#{isPublic} where photo_id=#{photoId}
+    </update>
+
+    <update id="updateIsPublicByPhotoId">
+        update photo set is_public=#{isPublic} where photo_id=#{photoId}
+    </update>
+
+    <select id="selectAllPhotoNotInRecycleBinByAlbumIdOrderByUploadTimeDesc" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+         from photo where album_id=#{albumId} and in_recycle_bin=0 order by upload_time desc
+    </select>
+
+    <select id="selectAllPhotoNotInRecycleBinByAlbumIdOrderByUploadTimeDescLimitPage" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+         from photo where album_id=#{albumId} and in_recycle_bin=0 order by upload_time desc limit #{begin},50
+    </select>
+
+    <select id="selectInRecycleBinByPhotoId" resultType="INTEGER">
+        select 1 from photo where photo_id=#{photoId} and in_recycle_bin=1;
+    </select>
+
+    <select id="selectPhotoInRecycleBinByUserIdOrderByDeleteTimeDesc" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+         from photo where user_id=#{userId} and in_recycle_bin=1 order by delete_time desc
+    </select>
+
+    <update id="moveOutRecycleBinByPhotoId">
+        update photo set in_recycle_bin=0,delete_time=null where photo_id=#{photoId}
+    </update>
+
+    <select id="selectPhotoIdWhereExpired" resultType="INTEGER">
+        SELECT photo_id FROM photo WHERE delete_time &lt;= (SELECT DATE_SUB(now(),interval 30 day));
+    </select>
+
+    <delete id="deleteByPhotoId">
+        delete from photo where photo_id=#{photoId}
+    </delete>
+
+    <select id="selectAllPhotoNotInRecycleBinByUserIdOrderByUploadTimeDescLimitPage" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+        from photo where user_id=#{userId} and in_recycle_bin=0 order by upload_time desc limit #{begin},50
+    </select>
+
+    <select id="selectPhotoIdByPath" resultType="INTEGER">
+        select photo_id from photo where path=#{path}
+    </select>
+
+    <update id="updateLikesByPhotoId">
+        update photo set likes=likes+#{amount} where photo_id=#{photoId}
+    </update>
+
+    <select id="selectPhotoIdLikeName" resultType="INTEGER" parameterType="java.util.List">
+        select photo_id from photo where
+        <foreach collection="list" item="keyword" separator=" or name like " open=" name like ">
+            #{keyword}
+        </foreach>
+    </select>
+
+    <select id="selectAllPhotoNotInRecycleBinByUserIdOrderByOriginalTimeAndUploadTimeDesc" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+        from photo where user_id=#{userId} and in_recycle_bin=0 order by original_time desc,upload_time desc
+    </select>
+
+    <select id="selectOrderByLikesLimit" resultType="com.zhitu.entity.Photo">
+        select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+        from photo where is_public=1 and in_recycle_bin=0 order by likes desc limit #{limit}
+    </select>
+</mapper>

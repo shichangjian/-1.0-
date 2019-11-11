@@ -1,0 +1,301 @@
+package com.zhitu.service.impl;
+
+import com.zhitu.dao.mapper.RetrievePasswordMapper;
+import com.zhitu.email.SendEmailToRetrievePassword;
+import com.zhitu.entity.Album;
+import com.zhitu.entity.User;
+import com.zhitu.dao.mapper.AlbumMapper;
+import com.zhitu.dao.mapper.UserMapper;
+import com.zhitu.exception.*;
+import com.zhitu.exception.*;
+import com.zhitu.exception.*;
+import com.zhitu.service.UserService;
+import com.zhitu.tools.PhotoTool;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * 用户服务实现类
+ */
+@Service //告诉spring创建一个实现类的实例表示这是一个bean
+public class UserServiceImpl implements UserService {
+
+    @Resource //指定这个类型或名字的bean
+    private UserMapper userMapper;
+
+    @Resource
+    private AlbumMapper albumMapper;
+
+    @Resource
+    private RetrievePasswordMapper retrievePasswordMapper;
+
+    @Autowired
+    private PhotoTool photoTool;
+
+    @Autowired
+    private SendEmailToRetrievePassword sendEmailToRetrievePassword;
+
+    /**
+     * 登记方法
+     * @param username
+     * @param password
+     * @param email
+     * @return
+     */
+    @Override
+    public int register(String username, String password, String email) {
+        //判断用户名邮箱是否已被注册
+        if(userMapper.selectExistByUsername(username) != null)
+            throw new UsernameExistException();//用户名已被注册
+        if(userMapper.selectExistByEmail(email) != null)
+            throw new EmailExistException();//邮箱已被注册
+        //md5加密
+        String passwordMd5 = DigestUtils.md5DigestAsHex(password.getBytes());
+        //创建User对象，准备写入数据库
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordMd5);
+        user.setEmail(email);
+        user.setGender(0);
+        user.setAvatar(photoTool.DEFAULT_AVATAR_FILE);
+        user.setSignature("");
+        user.setNickname(username);//默认用户名为昵称
+        user.setStoreSpace((long)1024 * 1024 * 1024 * 5);//默认5GB可用空间
+        user.setUsedSpace(0);
+        user.setPhotoAmount(0);
+        user.setPhotoInRecycleBinAmount(0);
+        user.setAlbumAmount(1);
+        //向数据库写入用户信息
+        userMapper.insert(user);
+        //获取用户ID
+        User userReturn = userMapper.selectBaseInfoByUsernameOrEmail(username);
+        int userId = userReturn.getUserId();
+
+        Album album = new Album();
+        album.setUserId(userId);
+        album.setName("默认相册");
+        album.setCover(0);
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        album.setCreateTime(timestamp);
+        album.setLastEditTime(timestamp);
+        album.setDescription("");
+        album.setIsDefaultAlbum(1);
+        album.setPhotoAmount(0);
+
+
+        //向数据库写入默认相册信息
+        albumMapper.insert(album);
+        return userMapper.selectAllByEmail(email).getUserId();
+    }
+
+    /**
+     *登陆方法
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public int login(String username,String password) {
+        User user = userMapper.selectBaseInfoByUsernameOrEmail(username);
+        String passwordMd5 = DigestUtils.md5DigestAsHex(password.getBytes());
+        if(user == null)
+            throw new UsernameOrEmailNotExistException();//用户名邮箱不存在
+        else if(!user.getPassword().equals(passwordMd5))
+            throw new PasswordErrorException();//密码错误
+        else
+            return user.getUserId();
+    }
+
+    /**
+     * 更改密码方法
+     * @param userId
+     * @param prePassword
+     * @param newPassword
+     */
+    @Override
+    public void changePassword(int userId, String prePassword, String newPassword) {
+        if(!userMapper.selectAllByUserId(userId).getPassword().equals(DigestUtils.md5DigestAsHex(prePassword.getBytes())))
+            throw new PasswordErrorException();
+        else {
+            userMapper.updatePasswordByUserId(userId,DigestUtils.md5DigestAsHex(newPassword.getBytes()));
+        }
+    }
+
+    /**
+     *获取用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<String, Object> getInfo(int userId) {
+        User user = userMapper.selectAllByUserId(userId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("username",user.getUsername());
+        map.put("email",user.getEmail());
+        map.put("gender",user.getGender());
+        map.put("avatar",user.getAvatar());
+        map.put("signature",user.getSignature());
+        map.put("nickname",user.getNickname());
+        map.put("storeSpace",user.getStoreSpace());
+        map.put("usedSpace",user.getUsedSpace());
+        map.put("photoAmount",user.getPhotoAmount());
+        map.put("photoInRecycleBinAmount",user.getPhotoInRecycleBinAmount());
+        map.put("albumAmount",user.getAlbumAmount());
+        return map;
+    }
+
+    /**
+     *编辑用户信息
+     * @param userId
+     * @param avatar
+     * @param nickname
+     * @param gender
+     * @param signature
+     */
+    @Override
+    public void editInfo(int userId, MultipartFile avatar, String nickname, int gender, String signature) {
+        if(avatar != null)
+        {
+            String fileName = avatar.getOriginalFilename();
+            int dot = fileName.lastIndexOf(".");
+            String suffix;
+            if(dot != -1 && dot < fileName.length())
+                suffix = fileName.substring(dot + 1);
+            else
+                throw new SuffixErrorException();//文件没有后缀名
+            if(!photoTool.checkSuffix(suffix))
+                throw new SuffixErrorException();//不支持的文件后缀
+            try {
+                ImageIO.scanForPlugins();
+                BufferedImage image = null;
+                image = ImageIO.read(avatar.getInputStream());
+                if(image == null)
+                    throw new NotImageException();//文件不是图片
+                //给文件一个随机UUID作为文件在服务器保存的文件名
+                String uuidName = UUID.randomUUID().toString() + '.' + suffix;
+                //上传文件
+                String newAvatarPath = "/images/avatar/" + userId + "/" + uuidName;
+                File uploadFile = new File(photoTool.LOCAL_DIR + newAvatarPath);
+                if(!uploadFile.getParentFile().exists())
+                {
+                    if(!uploadFile.getParentFile().mkdirs())
+                        throw new UploadFailedException();//上传失败,文件创建失败
+                }
+                avatar.transferTo(uploadFile);
+                String preAvatarPath = userMapper.selectAllByUserId(userId).getAvatar();
+                userMapper.updateAvatarByUserId(userId,newAvatarPath);
+                if(!preAvatarPath.equals(photoTool.DEFAULT_AVATAR_FILE))
+                {
+                    File preAvatar = new File(photoTool.LOCAL_DIR + preAvatarPath);
+                    preAvatar.delete();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        userMapper.updateUserInfoByUserId(userId,nickname,gender,signature);
+    }
+
+    /**
+     *通过电子邮件检索密码
+     * @param email
+     */
+    @Override
+    public void retrievePasswordByEmail(String email) {
+        User user = userMapper.selectAllByEmail(email);
+        if(user == null)
+            throw new EmailNotExistException();
+        String temp = user.getUserId() + user.getUsername() + user.getEmail() + user.getPassword() + System.currentTimeMillis();
+        String sid = DigestUtils.md5DigestAsHex(temp.getBytes());
+        retrievePasswordMapper.insert(user.getUserId(),sid,new Timestamp(System.currentTimeMillis()));
+        try {
+            sendEmailToRetrievePassword.send(email,user.getUsername(),sid);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *验证SID
+     * @param sid
+     * @return
+     */
+    @Override
+    public int verifySid(String sid) {
+        Integer userId = retrievePasswordMapper.selectUserIdBySid(sid);
+        if(userId == null)
+            throw new SidErrorException();
+        return userId;
+    }
+
+    /**
+     *检索密码
+     * @param sid
+     * @param userId
+     * @param newPassword
+     */
+    @Override
+    public void retrievePassword(String sid,int userId,String newPassword) {
+        Integer userIdGet = retrievePasswordMapper.selectUserIdBySid(sid);
+        if(userIdGet == null)
+            throw new SidErrorException();
+        if(userIdGet != userId)
+            throw new ForbiddenEditException();
+        userMapper.updatePasswordByUserId(userId,DigestUtils.md5DigestAsHex(newPassword.getBytes()));
+        retrievePasswordMapper.deleteBySid(sid);
+    }
+
+    /**
+     *显示头像
+     * @param userId
+     * @param response  //响应
+     */
+    @Override
+    public void showAvatar(int userId, HttpServletResponse response) {
+        String avatarPath = userMapper.selectAllByUserId(userId).getAvatar();
+        int dot = avatarPath.lastIndexOf(".");
+        String suffix = avatarPath.substring(dot + 1);
+        response.reset();
+        if(photoTool.isJpeg(suffix))
+            response.setContentType("image/jpeg");
+        else if(photoTool.isPng(suffix))
+            response.setContentType("image/png");
+        else if(photoTool.isBmp(suffix))
+            response.setContentType("application/x-bmp");
+        else if(photoTool.isTiff(suffix))
+            response.setContentType("image/tiff");
+        else if(photoTool.isGif(suffix))
+            response.setContentType("image/gif");
+        else
+        {
+            throw new SuffixErrorException();
+        }
+        try {
+            OutputStream outputStream = response.getOutputStream();
+            File file = new File(photoTool.LOCAL_DIR + avatarPath);
+            InputStream inputStream = new FileInputStream(file);
+            int len;
+            byte[] buffer = new byte[1024];
+            while((len = inputStream.read(buffer)) > 0)
+            {
+                outputStream.write(buffer,0,len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
