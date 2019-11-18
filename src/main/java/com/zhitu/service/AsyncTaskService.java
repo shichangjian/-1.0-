@@ -11,5 +11,5 @@ public interface AsyncTaskService {
 
     void photoUploadTask(int userId, int albumId, String prefix, String suffix, String uploadPath, File uploadFile);
 
-    void photoUploadTask(int userId, int albumId, String prefix, String suffix, String uploadPath, File uploadFile, Photo photo);
+    void photoUploadTask(int userId, int albumId, String suffix, String uploadPath, File uploadFile, Photo photo ,String[] tags);
 }

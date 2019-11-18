@@ -26,6 +26,11 @@ public class PhotoController {
 
     //用来处理请求地址映射
     //@RequestMapping 注解中的 method 元素声明了 HTTP 请求的 HTTP 方法的类型,一个 POST 类型的请求 /home 会交给 post() 方法来处理.
+
+
+
+
+
     /***
      * 上传
      */
@@ -236,5 +241,28 @@ public class PhotoController {
     {
         Object userIdObject = request.getSession().getAttribute("userId");
         return photoService.recommend(userIdObject);
+    }
+
+    //获取用户地标照片
+    @RequestMapping(value = "/getLandmarkPhotos")
+    public Map<String, Object> getLandmarkPhotos(@RequestParam int page, @RequestParam int landmarkId, HttpServletRequest request) {
+        Object userIdObject = request.getSession().getAttribute("userId");
+        if (userIdObject == null)
+            throw new NotLogInException();
+        int userId = Integer.parseInt(userIdObject.toString());
+        if (landmarkId > 0) {
+            return photoService.getLandmarkPhoto(userId, landmarkId, page);
+        } else {
+            return photoService.getAllLandmarkPhoto(userId, page);
+        }
+    }
+    //获取用户地标
+    @RequestMapping(value = "/getLandmarks")
+    public Map<String, Object> getLandmarks(HttpServletRequest request) {
+        Object userIdObject = request.getSession().getAttribute("userId");
+        if (userIdObject == null)
+            throw new NotLogInException();
+        int userId = Integer.parseInt(userIdObject.toString());
+        return photoService.getLandmarks(userId);
     }
 }

@@ -15,16 +15,16 @@ public class ApplicationContextHolder implements ApplicationContextAware {
         ApplicationContextHolder.applicationContext = applicationContext;
     }
 
-    public static ApplicationContext getApplicationContext(){
+    public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
 
-    public static <T> T getBean(Class<T> aclass){
+    public static <T> T getBean(Class<T> aclass) {
         return applicationContext.getBean(aclass);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T getBean(String aclass){
+    public static <T> T getBean(String aclass) {
         return (T) applicationContext.getBean(aclass);
     }
 }

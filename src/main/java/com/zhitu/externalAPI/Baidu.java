@@ -55,22 +55,46 @@ public class Baidu {
 
     public static String ACCESS_TOKEN;  //百度访问令牌
 
+    //通用物体和场景识别高级版
+    public static String ADVANCED_GENERAL = "advanced_general";
+
+    //地标识别
+    public static String LANDMARK = "landmark";
+
+    //人脸检测
+    public static String FACE_DETECT = "face_detect";
+
     /**
-     * 照片标签识别
-     * @param imageFile  //图像文件
-     * @param suffix  //后缀
+     * 图像分类
+     *
+     * @param imageFile //图像文件
+     * @param suffix    //后缀
      * @return
      */
-    public String photoTagIdentification(File imageFile, String suffix) {
-        String base64 = photoTool.encodeImageToBase64(imageFile, suffix);
+    public String imageClassify(File imageFile, String suffix, String type) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=" + ACCESS_TOKEN;
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+
+        String url = "";
+        if (type.equals(ADVANCED_GENERAL)) {
+            //图片通用物体和场景识别
+            url = "https://aip.baidubce.com/rest/2.0/image-classify/v2/advanced_general?access_token=" + ACCESS_TOKEN;
+        } else if (type.equals(LANDMARK)) {
+            //地标识别
+            url = "https://aip.baidubce.com/rest/2.0/image-classify/v1/landmark?access_token=" + ACCESS_TOKEN;
+        } else if (type.equals(FACE_DETECT)) {
+            //人脸检测
+            url = "https://aip.baidubce.com/rest/2.0/face/v3/detect?access_token=" + ACCESS_TOKEN;
+            params.add("image_type", "BASE64");
+            params.add("face_field", "age,beauty,expression,face_shape,gender,glasses,race,emotion");
+        }
+
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        MultiValueMap<String, Object> params= new LinkedMultiValueMap<>();
+        String base64 = photoTool.encodeImageToBase64(imageFile, suffix);
         params.add("image", base64);
-        HttpEntity<MultiValueMap<String,Object>> request = new HttpEntity<>(params,httpHeaders);
-        ResponseEntity<String> response = restTemplate.postForEntity(url,request,String.class);
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(params, httpHeaders);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
         return response.getBody();
     }
 
@@ -121,7 +145,7 @@ public class Baidu {
             /**
              * 返回结果示例
              */
-            System.err.println("result:" + result);
+            System.out.println("result:" + result);
             JsonNode jsonNode = new ObjectMapper().readValue(result,JsonNode.class);
             return jsonNode.get("access_token").asText();
         } catch (Exception e) {
@@ -131,39 +155,43 @@ public class Baidu {
         return null;
     }
 
-    public List<Map<String ,Object>> photoTag(String tagJsonString) throws IOException {
-        JsonNode json = new ObjectMapper().readValue(tagJsonString, JsonNode.class);
+    public List<Map<String ,Object>> photoTag(String jsonString) throws IOException {
+        JsonNode json = new ObjectMapper().readValue(jsonString, JsonNode.class);
         JsonNode result = json.path("result");
         Iterator<JsonNode> resultList = result.elements();
         List<Map<String ,Object>> tagListReturn = new ArrayList<>();
         while(resultList.hasNext())
         {
             JsonNode finalResult = resultList.next();
-            if(tagListReturn.size() == 0)
-            {
-                Map<String,Object> map1 = new HashMap<>();
-                map1.put("keyword",finalResult.get("root").asText());
-                map1.put("score",finalResult.get("score").asDouble());
-                tagListReturn.add(map1);
+            double score = finalResult.get("score").asDouble();
+            //如果score值大于0.5算有效
+            if (score > 0.5) {
+                Map<String, Object> ksmap = new HashMap<>();
+                ksmap.put("keyword", finalResult.get("keyword").asText());
+                ksmap.put("score", score);
+                tagListReturn.add(ksmap);
             }
-            for(int i = 0;i < tagListReturn.size();i++)
-            {
-                Map<String ,Object> tempMap = tagListReturn.get(i);
-                if(tempMap.get("keyword").toString().equals(finalResult.get("root").asText()))
-                    break;
-                if(i == tagListReturn.size() - 1)
-                {
-                    Map<String,Object> map1 = new HashMap<>();
-                    map1.put("keyword",finalResult.get("root").asText());
-                    map1.put("score",finalResult.get("score").asDouble());
-                    tagListReturn.add(map1);
-                }
-            }
-            Map<String,Object> map2 = new HashMap<>();
-            map2.put("keyword",finalResult.get("keyword").asText());
-            map2.put("score",finalResult.get("score").asDouble());
-            tagListReturn.add(map2);
         }
         return tagListReturn;
+    }
+    /**
+     * "地标识别" 解析地标
+     *
+     * @param jsonString
+     * @return
+     * @throws IOException
+     */
+    public String landmarkJson(String jsonString) throws IOException {
+        JsonNode json = new ObjectMapper().readValue(jsonString, JsonNode.class);
+        JsonNode result = json.path("result");
+        String landmark = result.get("landmark").asText();
+        String landmarkReturn = null;
+        //地标名称，无法识别则返回空字符串
+        //如果score值大于0.5算有效
+        if (null != landmark && landmark.trim().length() > 0) {
+            landmarkReturn = landmark;
+        }
+
+        return landmarkReturn;
     }
 }

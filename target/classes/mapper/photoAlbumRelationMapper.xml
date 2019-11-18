@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhitu.dao.mapper.PhotoAlbumRelationMapper">
+
+
+
+    <insert id="insert">
+        insert into photo_album_relation (photo_id,album_id) values (#{photoId},#{tagId})
+    </insert>
+
+
+    <select id="selectAlbumIdByPhotoId" resultType="integer">
+        select album_id from photo_album_relation where photo_id=#{photoId}
+    </select>
+
+    <update id="editAlbumIdByPhotoId">
+        update photo set album_id=#{albumId} where photo_id=#{photoId}
+        <!--按照片的id更新相册id-->
+    </update>
+</mapper>

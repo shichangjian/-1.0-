@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 照片映射器
@@ -12,6 +13,12 @@ import java.util.List;
 public interface PhotoMapper {
 
     void insert(Photo photo);
+
+    List<Photo> selectAllLandmarkPhoto(@Param("userId") int userId, @Param("begin") int begin);
+
+    List<Photo> selectLandmarkPhoto(@Param("userId") int userId, @Param("landmarkId") int landmarkId, @Param("begin") int begin);
+
+    List<Map<String, Object>> getLandmarks(@Param("userId") int userId);
 
     //在方法参数的前面写上@Param("参数名"),表示给参数命名,名称就是括号中的内容
     Photo selectAllByPhotoId(@Param("photoId") int photoId);

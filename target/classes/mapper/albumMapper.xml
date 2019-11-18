@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhitu.dao.mapper.AlbumMapper">
+
+    <insert id="insert" parameterType="com.zhitu.entity.Album">
+        insert into album (name,user_id,cover,create_time,last_edit_time,description,is_default_album,photo_amount)
+         VALUES (#{name},#{userId},#{cover},#{createTime},#{lastEditTime},#{description},#{isDefaultAlbum},#{photoAmount})
+    </insert>
+    <!--
+        查询
+    -->
+    <select id="selectDefaultAlbumIdByUserId" resultType="INTEGER">
+        select album_id from album where user_id=#{userId} and is_default_album=1 limit 1
+        <!--当用户赋值的时候或是默认相册的时候查询album表的album_id,当查询数据只有一条时，可用limit 1 可以极大的提高效率-->
+    </select>
+
+    <select id="selectDefaultAlbumIdByAlbumId" resultType="INTEGER">
+        select album_id from album where user_id=(select user_id from album where album_id=#{albumId}) and is_default_album=1 limit 1
+        <!--用户创建账号时或确定是默认相册时显示相册id-->
+    </select>
+
+    <update id="updatePhotoAmountByAlbumId">
+        update album set photo_amount=photo_amount+#{amount} where album_id=#{albumId}
+        <!--按相册id，更新album的照片数量-->
+    </update>
+
+    <update id="updateLastEditTimeByAlbumId">
+        update album set last_edit_time=#{time} where album_id=#{albumId}
+        <!--按相册的id更新相册的修改时间-->
+    </update>
+
+    <update id="editAlbumByAlbumId">
+        update album set name=#{name},cover=#{cover},description=#{description} where album_id=#{albumId}
+        <!--按相册的id更新相册名，封面，相册描述-->
+    </update>
+
+
+    <delete id="deleteByAlbumId">
+        delete from album where album_id=#{albumId}
+        <!--按相册的id删除album表-->
+    </delete>
+
+    <select id="selectUserIdByAlbumId" resultType="INTEGER">
+        select user_id from album where album_id=#{albumId}
+        <!--按相册的id查看album的用户id-->
+    </select>
+
+    <select id="selectIsDefaultAlbumByAlbumId" resultType="INTEGER">
+        select 1 from album where album_id=#{albumId} and is_default_album=1
+        <!--查有多少行数据-->
+    </select>
+
+    <select id="selectAllAlbumByUserId" resultType="com.zhitu.entity.Album">
+        select album_id,name,user_id,cover,create_time,last_edit_time,description,is_default_album,photo_amount
+        from album where user_id=#{userId}
+        <!--按用户id查询上面那些东西-->
+    </select>
+
+    <select id="selectAllByAlbumId" resultType="com.zhitu.entity.Album">
+        select album_id,name,user_id,cover,create_time,last_edit_time,description,is_default_album,photo_amount
+        from album where album_id=#{albumId}
+        <!--按相册的id查询上面那些东西-->
+    </select>
+
+    <update id="updateCoverByAlbumId">
+        update album set cover=#{photoId} where album_id=#{albumId}
+        <!--按相册的id更新封面-->
+    </update>
+</mapper>

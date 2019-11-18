@@ -71,6 +71,51 @@ public class PhotoServiceImpl implements PhotoService {
     private UserLikePhotoMapper userLikePhotoMapper;
 
     /**
+     * 查询用户下所有地标图片
+     *
+     * @param userId
+     * @param page
+     * @return
+     */
+    public Map<String, Object> getAllLandmarkPhoto(int userId, int page) {
+        Map<String, Object> mapReturn = new HashMap<>();
+        List<Photo> photos = photoMapper.selectAllLandmarkPhoto(userId, page);
+        mapReturn.put("photos", photos);
+        List<Map<String, Object>> landmarks = photoMapper.getLandmarks(userId);
+        mapReturn.put("landmarks", landmarks);
+        return mapReturn;
+    }
+
+    /**
+     * 查询用户下特定地标图片
+     *
+     * @param userId
+     * @param landmarkId
+     * @param page
+     * @return
+     */
+    public Map<String, Object> getLandmarkPhoto(int userId, int landmarkId, int page) {
+        Map<String, Object> mapReturn = new HashMap<>();
+        List<Photo> photos = photoMapper.selectLandmarkPhoto(userId, landmarkId, page);
+        mapReturn.put("photos", photos);
+        List<Map<String, Object>> landmarks = photoMapper.getLandmarks(userId);
+        mapReturn.put("landmarks", landmarks);
+        return mapReturn;
+    }
+    /**
+     * 获取用户下所有地标
+     *
+     * @param userId
+     * @return
+     */
+    public Map<String, Object> getLandmarks(int userId) {
+        Map<String, Object> mapReturn = new HashMap<>();
+        List<Map<String, Object>> landmarks = photoMapper.getLandmarks(userId);
+        mapReturn.put("landmarks", landmarks);
+        return mapReturn;
+    }
+
+    /**
      * @param userId
      * @param file
      * @param name
@@ -122,7 +167,7 @@ public class PhotoServiceImpl implements PhotoService {
         }
         file.transferTo(uploadFile);
 
-        asyncTaskService.photoUploadTask(userId,albumId,fileName.substring(0,dot),suffix,uploadPath,uploadFile,photo);
+        asyncTaskService.photoUploadTask(userId, albumId, suffix, uploadPath, uploadFile, photo, tags);
 
 //        //压缩并保存
 //        String thumbnailPath = photoTool.THUMBNAIL_DIR + userId + "/" + UUID.randomUUID() + "." + suffix;

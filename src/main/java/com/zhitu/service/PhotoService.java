@@ -11,6 +11,13 @@ import java.util.Map;
  * 照片服务
  */
 public interface PhotoService {
+
+    Map<String, Object> getAllLandmarkPhoto(int userId, int begin);
+
+    Map<String, Object> getLandmarkPhoto(int userId, int landmarkId, int begin);
+
+    public Map<String, Object> getLandmarks(int userId);
+
     void upload(int userId, MultipartFile file, String name, String description, int albumId, int isPublic, String[] tags) throws IOException;
 
     Map<String,Object> uploads(int userId, int albumId, MultipartFile[] files) throws IOException;
