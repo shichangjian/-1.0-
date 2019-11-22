@@ -155,13 +155,18 @@ public class Baidu {
         return null;
     }
 
-    public List<Map<String ,Object>> photoTag(String jsonString) throws IOException {
+    /**
+     * "通用物体和场景识别高级版" 解析标签和评分
+     * @param jsonString
+     * @return
+     * @throws IOException
+     */
+    public List<Map<String, Object>> photoTag(String jsonString) throws IOException {
         JsonNode json = new ObjectMapper().readValue(jsonString, JsonNode.class);
         JsonNode result = json.path("result");
         Iterator<JsonNode> resultList = result.elements();
-        List<Map<String ,Object>> tagListReturn = new ArrayList<>();
-        while(resultList.hasNext())
-        {
+        List<Map<String, Object>> tagListReturn = new ArrayList<>();
+        while (resultList.hasNext()) {
             JsonNode finalResult = resultList.next();
             double score = finalResult.get("score").asDouble();
             //如果score值大于0.5算有效
@@ -173,6 +178,90 @@ public class Baidu {
             }
         }
         return tagListReturn;
+    }
+    /**
+     * "人脸检测" 解析人脸信息
+     *
+     * @param jsonString
+     * @return
+     * @throws IOException
+     */
+    public List<Map<String, Object>> faceDetectJson(String jsonString) throws IOException {
+        List<Map<String, Object>> faceListReturn = new ArrayList<>();
+        JsonNode json = new ObjectMapper().readValue(jsonString, JsonNode.class);
+        JsonNode result = json.path("result");
+        if (null == result || result.asText().equals("null")) {
+            return faceListReturn;
+        }
+        JsonNode faceNumNode = result.get("face_num");
+        if (faceNumNode.asInt() > 0) {
+            JsonNode faceListNode = result.get("face_list");
+            Iterator<JsonNode> faceList = faceListNode.elements();
+            while (faceList.hasNext()) {
+                JsonNode faceResult = faceList.next();
+                //人脸置信度，范围【0~1】，代表这是一张人脸的概率，0最小、1最大
+                //这里以大于0.5人为是人脸。
+                double face_probability = faceResult.get("face_probability").asDouble();
+                //如果score值大于0.5算有效
+                if (face_probability > 0.5) {
+                    Map<String, Object> ksmap = new HashMap<>();
+                    ksmap.put("age", faceResult.get("age").asText());
+                    ksmap.put("beauty", faceResult.get("beauty").asText());
+
+                    //表情置信度，范围【0~1】，0最小、1最大。大于0.5认为有效
+                    double expression_probability = faceResult.get("expression").get("probability").asDouble();
+                    if (expression_probability > 0.5) {
+                        ksmap.put("expression", faceResult.get("expression").get("type").asText());
+                    } else {
+                        ksmap.put("expression", "unknown");
+                    }
+
+                    //脸型置信度，范围【0~1】，代表这是人脸形状判断正确的概率，0最小、1最大。大于0.5认为有效
+                    double face_shape_probability = faceResult.get("face_shape").get("probability").asDouble();
+                    if (face_shape_probability > 0.5) {
+                        ksmap.put("face_shape", faceResult.get("face_shape").get("type").asText());
+                    } else {
+                        ksmap.put("face_shape", "unknown");
+                    }
+
+                    //性别置信度，范围【0~1】，0代表概率最小、1代表最大。大于0.5认为有效
+                    double gender_probability = faceResult.get("gender").get("probability").asDouble();
+                    if (gender_probability > 0.5) {
+                        ksmap.put("gender", faceResult.get("gender").get("type").asText());
+                    } else {
+                        ksmap.put("gender", "unknown");
+                    }
+
+                    //眼镜置信度，范围【0~1】，0代表概率最小、1代表最大。大于0.5认为有效
+                    double glasses_probability = faceResult.get("glasses").get("probability").asDouble();
+                    if (glasses_probability > 0.5) {
+                        ksmap.put("glasses", faceResult.get("glasses").get("type").asText());
+                    } else {
+                        ksmap.put("glasses", "unknown");
+                    }
+
+                    //情绪置信度，范围0~1。大于0.5认为有效
+                    double emotion_probability = faceResult.get("emotion").get("probability").asDouble();
+                    if (emotion_probability > 0.5) {
+                        ksmap.put("emotion", faceResult.get("emotion").get("type").asText());
+                    } else {
+                        ksmap.put("emotion", "unknown");
+                    }
+
+                    //性别置信度，范围【0~1】，0代表概率最小、1代表最大。大于0.5认为有效
+                    double race_probability = faceResult.get("race").get("probability").asDouble();
+                    if (race_probability > 0.5) {
+                        ksmap.put("race", faceResult.get("race").get("type").asText());
+                    } else {
+                        ksmap.put("race", "unknown");
+                    }
+
+                    faceListReturn.add(ksmap);
+                }
+            }
+        }
+
+        return faceListReturn;
     }
     /**
      * "地标识别" 解析地标
