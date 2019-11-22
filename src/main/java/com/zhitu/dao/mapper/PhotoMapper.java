@@ -14,6 +14,10 @@ public interface PhotoMapper {
 
     void insert(Photo photo);
 
+    List<Photo> selectPhotosByTag(@Param("userId") int userId, @Param("tagId") int tagId, @Param("begin") int begin);
+
+    List<Photo> selectFacePhoto(@Param("userId") int userId, @Param("begin") int begin);
+
     List<Photo> selectAllLandmarkPhoto(@Param("userId") int userId, @Param("begin") int begin);
 
     List<Photo> selectLandmarkPhoto(@Param("userId") int userId, @Param("landmarkId") int landmarkId, @Param("begin") int begin);

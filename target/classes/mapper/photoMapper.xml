@@ -5,10 +5,24 @@
 
 <mapper namespace="com.zhitu.dao.mapper.PhotoMapper">
 
-    <insert id="insert" parameterType="com.zhitu.entity.Photo" keyProperty="photoId" keyColumn="photo_id" useGeneratedKeys="true">
-        insert into photo (name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time)
-         VALUES (#{name},#{suffix},#{path},#{thumbnailPath},#{description},#{information},#{userId},#{albumId},#{likes},#{isPublic},#{size},#{width},#{height},#{inRecycleBin},#{originalTime},#{uploadTime},#{deleteTime})
+    <insert id="insert" parameterType="com.zhitu.entity.Photo" keyProperty="photoId" keyColumn="photo_id"
+            useGeneratedKeys="true">
+    insert into photo (name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time)
+     VALUES (#{name},#{suffix},#{path},#{thumbnailPath},#{description},#{information},#{userId},#{albumId},#{likes},#{isPublic},#{size},#{width},#{height},#{inRecycleBin},#{originalTime},#{uploadTime},#{deleteTime})
     </insert>
+
+    <select id="selectPhotosByTag" resultType="com.zhitu.entity.Photo">
+    select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+    from photo where exists(select 1 from photo_tag_relation where photo.photo_id=photo_tag_relation.photo_id and photo_tag_relation.tag_id=#{tagId})
+    and user_id=#{userId} and in_recycle_bin=0 order by upload_time desc limit #{begin},50
+    </select>
+
+    <!-- 查询用户下人脸图片 -->
+    <select id="selectFacePhoto" resultType="com.zhitu.entity.Photo">
+    select photo_id,name,suffix,path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time
+    from photo where user_id=#{userId} and in_recycle_bin=0 and exists(select 1 from face where photo.photo_id=face.photo_id) order by original_time desc,upload_time desc limit #{begin},50
+    </select>
+
 
     <select id="selectAllByPhotoId" resultType="com.zhitu.entity.Photo">
         select photo_id,name,suffix,path,thumbnail_path,description,information,user_id,album_id,likes,is_public,size,width,height,in_recycle_bin,original_time,upload_time,delete_time

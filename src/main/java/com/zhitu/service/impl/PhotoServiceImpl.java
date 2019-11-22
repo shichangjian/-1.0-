@@ -3,6 +3,7 @@ package com.zhitu.service.impl;
 import com.zhitu.dao.mapper.*;
 import com.zhitu.dao.mapper.*;
 import com.zhitu.entity.Count;
+import com.zhitu.entity.Face;
 import com.zhitu.entity.Photo;
 import com.zhitu.exception.*;
 import com.zhitu.dao.mapper.*;
@@ -69,6 +70,50 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Resource
     private UserLikePhotoMapper userLikePhotoMapper;
+    @Resource
+    private FaceMapper faceMapper;
+
+    /**
+     * 获取人脸信息
+     *
+     * @param photoId
+     * @return
+     */
+    public Map<String, Object> getFace(int photoId) {
+        Map<String, Object> mapReturn = new HashMap<>();
+        List<Face> faces = faceMapper.selectFaces(photoId);
+        mapReturn.put("faces", faces);
+        return mapReturn;
+    }
+
+    /**
+     * 获取人脸照片
+     *
+     * @param userId
+     * @param page
+     * @return
+     */
+    public Map<String, Object> getFacePhotos(int userId, int page) {
+        Map<String, Object> mapReturn = new HashMap<>();
+        List<Photo> photos = photoMapper.selectFacePhoto(userId, page);
+        if (null != photos && photos.size() > 0) {
+            for (Photo photo : photos) {
+                int photoId = photo.getPhotoId();
+                List<Face> faces = faceMapper.selectFaces(photoId);
+                if (null != faces && faces.size() > 0) {
+                    String title = photo.getName() + "<br>";
+                    for (Face face : faces) {
+                        title = title + "人脸" + face.getFaceId() + "信息:{年龄:" + face.getAge() + ",颜值:" + face.getBeauty();
+                        title = title + ",表情:" + face.getExpression() + ",脸型:" + face.getFaceShape() + ",性别:" + face.getGender();
+                        title = title + ",眼镜:" + face.getGlasses() + ",情绪:" + face.getEmotion() + ",人种:" + face.getRace() + "}<br>";
+                    }
+                    photo.setFaceInfo(title);
+                }
+            }
+        }
+        mapReturn.put("photos", photos);
+        return mapReturn;
+    }
 
     /**
      * 查询用户下所有地标图片
@@ -169,96 +214,6 @@ public class PhotoServiceImpl implements PhotoService {
 
         asyncTaskService.photoUploadTask(userId, albumId, suffix, uploadPath, uploadFile, photo, tags);
 
-//        //压缩并保存
-//        String thumbnailPath = photoTool.THUMBNAIL_DIR + userId + "/" + UUID.randomUUID() + "." + suffix;
-//        File thumbnailFile = new File(photoTool.LOCAL_DIR + thumbnailPath);
-//        if(!thumbnailFile.getParentFile().exists())
-//        {
-//            if(!thumbnailFile.getParentFile().mkdirs())
-//                throw new UploadFailedException();//上传失败,文件创建失败
-//        }
-//        Thumbnails.of(uploadFile).scale(0.5).outputQuality(0.5).toFile(thumbnailFile);
-//        photo.setThumbnailPath(thumbnailPath);
-//        //如果是jpeg格式的图片，处理EXIF信息
-//        if(photoTool.isJpeg(suffix))
-//        {
-//            try {
-//                Metadata metadata = ImageMetadataReader.readMetadata(uploadFile);
-//                Map<String,String> map = new HashMap<>();
-//                for (Directory directory : metadata.getDirectories())
-//                {
-//                    for (Tag tag : directory.getTags())
-//                    {
-//                        map.put(tag.getTagName(),tag.getDescription());
-//                        if(tag.getTagName().equals("Date/Time Original"))
-//                        {
-//                            photo.setOriginalTime(photoTool.exifTimeToTimestamp(tag.getDescription()));
-//                        }
-//                    }
-//                }
-//                //MAP转JSON,并写入photo对象
-//                ObjectMapper objectMapper = new ObjectMapper();
-//                photo.setInformation(objectMapper.writeValueAsString(map));
-//            } catch (ImageProcessingException e) {
-//                e.printStackTrace();
-//            }
-//        }
-////        else if(photoTool.is_png(suffix)) {
-////            try {
-////                Metadata metadata = ImageMetadataReader.readMetadata(uploadFile);
-////                for (Directory directory : metadata.getDirectories())
-////                {
-////                    for (Tag tag : directory.getTags())
-////                    {
-////                        if(tag.getTagName().equals("File Modified Date"))
-////                        {
-////                            photo.setOriginal_time(photoTool.pngTimeToTimestamp(tag.getDescription()));
-////                        }
-////                    }
-////                }
-////            } catch (ImageProcessingException e) {
-////                e.printStackTrace();
-////            }
-////        }
-//        photo.setWidth(image.getWidth());
-//        photo.setHeight(image.getHeight());
-//        photo.setUserId(userId);
-//        photo.setDescription(description);
-//        photo.setLikes(0);
-//        photo.setAlbumId(albumId);
-//        photo.setIsPublic(isPublic);
-//        photo.setInRecycleBin(0);
-//        photo.setPath(uploadPath);
-//        photo.setUploadTime(new Timestamp(System.currentTimeMillis()));
-//        //将photo对象写入数据库
-//        photoMapper.insert(photo);
-//        //更新已用空间
-//        userMapper.updateUsedSpaceByUserId(userId,fileSizeB);
-//        //更新用户照片数量
-//        userMapper.updatePhotoAmountByUserId(userId,1);
-//        //更新相册信息
-//        albumMapper.updatePhotoAmountByAlbumId(albumId,1);
-//        albumMapper.updateLastEditTimeByAlbumId(albumId,new Timestamp(System.currentTimeMillis()));
-//        //图片AI智能识别标签
-//        String tagJsonString = baidu.photoTagIdentification(thumbnailFile,suffix);
-//        List<Map<String,Object>> tagList = baidu.photoTag(tagJsonString);
-//        int photoId = photoMapper.selectPhotoIdByPath(uploadPath);
-//        for(Map<String,Object> tag : tagList)
-//        {
-//            if(tagMapper.selectExistByName(tag.get("keyword").toString()) == null)
-//                tagMapper.insert(tag.get("keyword").toString());
-//            int tagId = tagMapper.selectTagIdByName(tag.get("keyword").toString());
-//            photoTagRelationMapper.insert(photoId,tagId,Double.parseDouble(tag.get("score").toString()));
-//        }
-//        //添加用户自定义的标签
-//        for(String tag : tags)
-//        {
-//            if(tagMapper.selectExistByName(tag) == null)
-//                tagMapper.insert(tag);
-//            int tagId = tagMapper.selectTagIdByName(tag);
-//            if(photoTagRelationMapper.selectExistByPhotoIdAndTagId(photoId,tagId) == null)
-//                photoTagRelationMapper.insert(photoId,tagId,1);
-//        }
     }
 
     /**
@@ -793,48 +748,57 @@ public class PhotoServiceImpl implements PhotoService {
 
     /**
      * 获取照片
+     *
      * @param userId
      * @param page
      * @return
      */
     @Override
-    public Map<String, Object> getPhotos(int userId,int page) {
+    public Map<String, Object> getPhotos(int userId, int tagId, int page) {
         List<Map<String, Object>> listMap = new ArrayList<>();
-        Map<String,Object> mapReturn = new HashMap<>();
+        Map<String, Object> mapReturn = new HashMap<>();
         int photoAmount = userMapper.selectAllByUserId(userId).getPhotoAmount();
         int pages;
-        if(photoAmount % 50 > 0)
+        if (photoAmount % 50 > 0)
             pages = photoAmount / 50 + 1;
         else
             pages = photoAmount / 50;
-        mapReturn.put("pages",pages);
-        if(page > pages || page <= 0)
+        mapReturn.put("pages", pages);
+        if (page > pages || page <= 0)
             throw new PageNotExistException();
-        List<Photo> photos = photoMapper.selectAllPhotoNotInRecycleBinByUserIdOrderByUploadTimeDescLimitPage(userId,(page - 1) * 50);
-        for(Photo photo : photos)
-        {
+
+
+        List<Photo> photos = null;
+        if (tagId > 0) {
+            photos = photoMapper.selectPhotosByTag(userId, tagId, (page - 1) * 50);
+        } else {
+            photos = photoMapper.selectAllPhotoNotInRecycleBinByUserIdOrderByUploadTimeDescLimitPage(userId, (page - 1) * 50);
+        }
+
+        for (Photo photo : photos) {
             Map<String, Object> map = new HashMap<>();
-            map.put("photoId",photo.getPhotoId());
-            map.put("name",photo.getName());
-            map.put("description",photo.getDescription());
-            map.put("albumId",photo.getAlbumId());
-            map.put("likes",photo.getLikes());
-            map.put("isPublic",photo.getIsPublic());
-            map.put("size",photo.getSize());
-            map.put("width",photo.getWidth());
-            map.put("height",photo.getHeight());
-            map.put("originalTime",photo.getOriginalTime());
-            map.put("uploadTime",photo.getUploadTime());
+            map.put("photoId", photo.getPhotoId());
+            map.put("name", photo.getName());
+            map.put("description", photo.getDescription());
+            map.put("albumId", photo.getAlbumId());
+            map.put("likes", photo.getLikes());
+            map.put("isPublic", photo.getIsPublic());
+            map.put("size", photo.getSize());
+            map.put("width", photo.getWidth());
+            map.put("height", photo.getHeight());
+            map.put("originalTime", photo.getOriginalTime());
+            map.put("uploadTime", photo.getUploadTime());
             List<String> photoTagList = new ArrayList<>();
             List<Integer> photoTagIdList = photoTagRelationMapper.selectTagIdByPhotoId(photo.getPhotoId());
-            for(int tagId : photoTagIdList)
-            {
-                photoTagList.add(tagMapper.selectNameByTagId(tagId));
+            for (int photoTagId : photoTagIdList) {
+                photoTagList.add(tagMapper.selectNameByTagId(photoTagId));
             }
-            map.put("tags",photoTagList);
+            map.put("tags", photoTagList);
             listMap.add(map);
         }
-        mapReturn.put("photos",listMap);
+        List<Map<String, Object>> allTags = tagMapper.selectTags();
+        mapReturn.put("allTags", allTags);
+        mapReturn.put("photos", listMap);
         return mapReturn;
     }
 

@@ -12,6 +12,10 @@ import java.util.Map;
  */
 public interface PhotoService {
 
+    Map<String, Object> getFace(int photold);
+
+    Map<String, Object> getFacePhotos(int userId, int page);
+
     Map<String, Object> getAllLandmarkPhoto(int userId, int begin);
 
     Map<String, Object> getLandmarkPhoto(int userId, int landmarkId, int begin);
@@ -42,7 +46,7 @@ public interface PhotoService {
 
     void completelyDelete(int userId, List<Integer> photos);
 
-    Map<String,Object> getPhotos(int userId, int page);
+    Map<String,Object> getPhotos(int userId, int tagId, int page);
 
     Map<String,Object> globalSearch(Object userIdObject, String keyword, int page);
 

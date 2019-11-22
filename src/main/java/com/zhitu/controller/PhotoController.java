@@ -187,13 +187,12 @@ public class PhotoController {
 
     //获取用户所有照片
     @RequestMapping(value = "/getPhotos")
-    public Map<String,Object> getPhotos(@RequestParam int page, HttpServletRequest request)
-    {
+    public Map<String, Object> getPhotos(@RequestParam int page, @RequestParam int tagId, HttpServletRequest request) {
         Object userIdObject = request.getSession().getAttribute("userId");
-        if(userIdObject == null)
+        if (userIdObject == null)
             throw new NotLogInException();
         int userId = Integer.parseInt(userIdObject.toString());
-        return photoService.getPhotos(userId,page);
+        return photoService.getPhotos(userId, tagId, page);
     }
     //用来处理请求地址映射
     //@RequestMapping 注解中的 method 元素声明了 HTTP 请求的 HTTP 方法的类型,一个 POST 类型的请求 /home 会交给 post() 方法来处理.
@@ -241,6 +240,22 @@ public class PhotoController {
     {
         Object userIdObject = request.getSession().getAttribute("userId");
         return photoService.recommend(userIdObject);
+    }
+
+    //获取照片人脸信息
+    @RequestMapping(value = "/getFace")
+    public Map<String, Object> getFace(@RequestParam int faceId, HttpServletRequest request) {
+        return photoService.getFace(faceId);
+    }
+
+    //获取用户人脸照片
+    @RequestMapping(value = "/getFacePhotos")
+    public Map<String, Object> getFacePhotos(@RequestParam int page, HttpServletRequest request) {
+        Object userIdObject = request.getSession().getAttribute("userId");
+        if (userIdObject == null)
+            throw new NotLogInException();
+        int userId = Integer.parseInt(userIdObject.toString());
+        return photoService.getFacePhotos(userId, page);
     }
 
     //获取用户地标照片

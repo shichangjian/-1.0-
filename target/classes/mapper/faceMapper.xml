@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhitu.dao.mapper.FaceMapper">
+    <insert id="insert" parameterType="com.zhitu.entity.Face" keyProperty="faceId" keyColumn="face_id" useGeneratedKeys="true">
+        insert into face (photo_id,age,beauty,expression,face_shape,gender,glasses,emotion,race)
+        VALUES (#{photoId},#{age},#{beauty},#{expression},#{faceShape},#{gender},#{glasses},#{emotion},#{race})
+    </insert>
+
+    <select id="selectFaces" resultType="com.zhitu.entity.Face">
+        select face_id,photo_id,age,beauty,expression,face_shape,gender,glasses,emotion from face where photo_id=#{photoId}
+    </select>
+</mapper>

@@ -8,6 +8,7 @@ import com.drew.metadata.Tag;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhitu.dao.mapper.*;
 import com.zhitu.dao.mapper.*;
+import com.zhitu.entity.Face;
 import com.zhitu.entity.Photo;
 import com.zhitu.dao.mapper.*;
 import com.zhitu.externalAPI.Baidu;
@@ -66,6 +67,10 @@ public class AsyncTaskServiceImpl implements AsyncTaskService {
 
     @Autowired
     private Baidu baidu;
+
+    @Resource
+    private FaceMapper faceMapper;
+
 
     private void doUpload(int userId, int albumId, String suffix, String uploadPath, File uploadFile, Photo photo, String[] cus_tags) {
         BufferedImage image = null;
@@ -169,6 +174,29 @@ public class AsyncTaskServiceImpl implements AsyncTaskService {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        //人脸检测
+        String faceJsonString = baidu.imageClassify(thumbnailFile, suffix, Baidu.FACE_DETECT);
+        List<Map<String, Object>> faceList = null;
+        try {
+            faceList = baidu.faceDetectJson(faceJsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (faceList != null && faceList.size() > 0) {
+            for (Map<String, Object> faceMap : faceList) {
+                Face face = new Face();
+                face.setPhotoId(photo.getPhotoId());
+                face.setAge(faceMap.get("age").toString());
+                face.setBeauty(faceMap.get("beauty").toString());
+                face.setExpression(faceMap.get("expression").toString());
+                face.setFaceShape(faceMap.get("face_shape").toString());
+                face.setGender(faceMap.get("gender").toString());
+                face.setGlasses(faceMap.get("glasses").toString());
+                face.setEmotion(faceMap.get("emotion").toString());
+                face.setRace(faceMap.get("race").toString());
+                faceMapper.insert(face);
+            }
         }
     }
 

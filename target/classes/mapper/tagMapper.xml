@@ -9,6 +9,10 @@
         insert into tag (name) values (#{name})
     </insert>
 
+    <select id="selectTags" resultType="map">
+    select tag_id,name from tag
+    </select>
+
     <select id="selectExistByName" resultType="INTEGER">
         select 1 from tag where name=#{name} limit 1
     </select>

@@ -1,91 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6f6b54f9-4797-4e26-a3da-6a1f72b5a5b9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/LandMarkMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoLandMarkRelationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/landmarkMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/photoLandmarkRelationMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/ApplicationContextHolder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/Scheduled/ScheduledTasks.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/SmartAlbumApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/config/ThreadConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/controller/AdminController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/controller/AlbumController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/controller/PhotoController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/config/RedisConfig$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/config/RedisConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/AlbumMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/LandMarkMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoAlbumRelationMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoLandMarkRelationMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoTagRelationMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/RetrievePasswordMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/TagMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/TempFileMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/UserLikePhotoMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/UserMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/email/SendEmailToRetrievePassword.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Album.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Count.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Photo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/AlreadyLogInException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/EmailExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/EmailNotExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/EmptyFileException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/ForbiddenAccessException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/ForbiddenEditException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/NotImageException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/NotLogInException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/PageNotExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/PasswordErrorException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/SidErrorException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/SpaceAlreadyFullException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/SuffixErrorException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/UploadFailedException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/UsernameExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/exception/UsernameOrEmailNotExistException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/externalAPI/Baidu.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/externalAPI/Tencent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/httpSessionListener/OnlineUserStatistics.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/AlbumService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/AsyncTaskService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/PhotoService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/AlbumServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/AsyncTaskServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/PhotoServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/tools/PhotoTool.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/tools/ZipTool.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/albumMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/landmarkMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/photoAlbumRelationMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/photoLandmarkRelationMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/photoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/photoTagRelationMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/retrievePasswordMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/tagMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/tempFileMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/userLikePhotoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/mapper/userMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/templates/retrievePasswordEmail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/zhitu/SmartAlbumApplicationTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/ApplicationContextHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/ApplicationContextHolder.java" afterDir="false" />
+    <list default="true" id="6f6b54f9-4797-4e26-a3da-6a1f72b5a5b9" name="Default Changelist" comment="地标模块">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/FaceMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/entity/Face.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/faceMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/FaceMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Face.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mapper/faceMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/entity/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/entity/Photo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/service/AsyncTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/service/AsyncTaskService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/tagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/tagMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/controller/PhotoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/controller/PhotoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/PhotoMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/TagMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/dao/mapper/TagMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/entity/Photo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/externalAPI/Baidu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/externalAPI/Baidu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/service/PhotoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/PhotoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/AsyncTaskServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/AsyncTaskServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/PhotoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/zhitu/service/impl/PhotoServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/photoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/photoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tagMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/tagMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -101,16 +44,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2156">
-              <caret line="127" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="3476">
+              <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
               <folding>
-                <element signature="e#5580#5891#1" />
-                <element signature="e#5622#5881#1" />
-                <element signature="docComment;method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
-                <element signature="method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
-                <element signature="docComment;method#photoUploadTask#1;class#AsyncTaskServiceImpl#0" />
+                <element signature="e#3524#3525#0" expanded="true" />
+                <element signature="e#3564#3565#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            <state relative-caret-position="968">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
             </state>
           </provider>
         </entry>
@@ -128,64 +68,78 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="704">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="4114">
+              <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="163" column="9" lean-forward="true" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.5.RELEASE/spring-aop-5.1.5.RELEASE.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1408">
-              <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="184" column="79" selection-start-line="184" selection-start-column="79" selection-end-line="184" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="70" lean-forward="true" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
+            <state relative-caret-position="352">
+              <caret line="16" column="73" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tagMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+            <state relative-caret-position="286">
+              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/AsyncTaskService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+            <state relative-caret-position="3762">
+              <caret line="752" column="18" selection-start-line="752" selection-start-column="18" selection-end-line="752" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="docComment;method#getFacePhotos#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#getAllLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+                <element signature="method#getAllLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#getLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+                <element signature="method#getLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#getLandmarks#0;class#PhotoServiceImpl#0" />
+                <element signature="method#getLandmarks#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#upload#0;class#PhotoServiceImpl#0" />
+                <element signature="method#upload#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#uploads#0;class#PhotoServiceImpl#0" />
+                <element signature="method#uploads#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#download#0;class#PhotoServiceImpl#0" />
+                <element signature="method#download#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#downloads#0;class#PhotoServiceImpl#0" />
+                <element signature="method#downloads#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#moveToRecycleBin#0;class#PhotoServiceImpl#0" />
+                <element signature="method#moveToRecycleBin#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#edit#0;class#PhotoServiceImpl#0" />
+                <element signature="method#edit#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#show#0;class#PhotoServiceImpl#0" />
+                <element signature="method#show#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#showThumbnail#0;class#PhotoServiceImpl#0" />
+                <element signature="method#showThumbnail#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#getRecycleBinPhotos#0;class#PhotoServiceImpl#0" />
+                <element signature="method#getRecycleBinPhotos#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#move#0;class#PhotoServiceImpl#0" />
+                <element signature="method#move#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#moveOutRecycleBin#0;class#PhotoServiceImpl#0" />
+                <element signature="method#moveOutRecycleBin#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#completelyDelete#0;class#PhotoServiceImpl#0" />
+                <element signature="method#completelyDelete#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#globalSearch#0;class#PhotoServiceImpl#0" />
+                <element signature="method#globalSearch#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#like#0;class#PhotoServiceImpl#0" />
+                <element signature="method#like#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#personalSearch#0;class#PhotoServiceImpl#0" />
+                <element signature="method#personalSearch#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#timeline#0;class#PhotoServiceImpl#0" />
+                <element signature="method#timeline#0;class#PhotoServiceImpl#0" />
+                <element signature="docComment;method#recommend#0;class#PhotoServiceImpl#0" />
+                <element signature="method#recommend#0;class#PhotoServiceImpl#0" />
               </folding>
             </state>
           </provider>
@@ -195,10 +149,19 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+              <caret line="16" column="117" selection-start-line="16" selection-start-column="117" selection-end-line="16" selection-end-column="117" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -223,10 +186,16 @@
       <find>getLandmarkPhotos</find>
       <find>getLandmarks</find>
       <find>API_KEY</find>
+      <find>photoTag</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="test1" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -237,23 +206,28 @@
         <option value="$PROJECT_DIR$/src/main/resources/mapper/landmarkMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoLandMarkRelationMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/service/AsyncTaskService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/faceMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/entity/Face.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/entity/Photo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/FaceMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/tagMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="1997" />
-    <option name="y" value="71" />
-    <option name="width" value="1165" />
-    <option name="height" value="701" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -263,8 +237,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -314,25 +286,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="zhitu" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart_album_1.0" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart_album_1.0" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="zhitu" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="smart_album_1.0" type="b2602c69:ProjectViewProjectNode" />
-              <item name="smart_album_1.0" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="zhitu" type="462c0819:PsiDirectoryNode" />
               <item name="externalAPI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -373,6 +326,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -432,18 +387,28 @@
       <workItem from="1573786176918" duration="3921000" />
       <workItem from="1573796385894" duration="113000" />
       <workItem from="1573797711918" duration="12371000" />
-      <workItem from="1574041637578" duration="3898000" />
+      <workItem from="1574041637578" duration="5064000" />
+      <workItem from="1574152449522" duration="22734000" />
+      <workItem from="1574388615496" duration="6934000" />
+      <workItem from="1574402207805" duration="720000" />
     </task>
+    <task id="LOCAL-00001" summary="地标模块">
+      <created>1574071252224</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574071252224</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49021000" />
+    <option name="totallyTimeSpent" value="80394000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1997" y="71" width="1165" height="701" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31941923" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23975822" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -454,7 +419,7 @@
       <window_info id="MyBatis Builder" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4301676" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.27234638" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.37941176" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.041899443" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -465,9 +430,9 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.9558824" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.25441176" />
       <window_info anchor="bottom" id="MyBatis Log" order="14" />
-      <window_info anchor="bottom" id="Messages" order="15" weight="0.3282123" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.43970588" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -524,32 +489,68 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="地标模块" />
+    <option name="LAST_COMMIT_MESSAGE" value="地标模块" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java</url>
-          <line>44</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java</url>
-          <line>204</line>
+          <line>232</line>
           <properties />
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java</url>
-          <line>70</line>
-          <properties />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java</url>
-          <line>125</line>
-          <properties />
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -611,13 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoAlbumRelationMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/AlbumMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -667,41 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2156">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-          <folding>
-            <element signature="e#5580#5891#1" />
-            <element signature="e#5622#5881#1" />
-            <element signature="docComment;method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
-            <element signature="method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
-            <element signature="docComment;method#photoUploadTask#1;class#AsyncTaskServiceImpl#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="704">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.5.RELEASE/spring-aop-5.1.5.RELEASE.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1408">
@@ -718,7 +677,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/AsyncTaskService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
+        <state relative-caret-position="286">
           <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -726,10 +685,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_231/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        <state relative-caret-position="218">
+          <caret line="110" column="19" selection-start-line="110" selection-start-column="19" selection-end-line="110" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/faceMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="52" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/AsyncTaskServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3454">
+          <caret line="187" column="35" selection-start-line="187" selection-start-column="35" selection-end-line="187" selection-end-column="35" />
+          <folding>
+            <element signature="docComment;method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
+            <element signature="method#photoUploadTask#0;class#AsyncTaskServiceImpl#0" />
+            <element signature="docComment;method#photoUploadTask#1;class#AsyncTaskServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/entity/Face.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1716">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+          <folding>
+            <element signature="e#922#923#0" expanded="true" />
+            <element signature="e#952#953#0" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+            <element signature="e#1033#1034#0" expanded="true" />
+            <element signature="e#1127#1128#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
+            <element signature="e#1801#1802#0" expanded="true" />
+            <element signature="e#1831#1832#0" expanded="true" />
+            <element signature="e#1949#1950#0" expanded="true" />
+            <element signature="e#1979#1980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.16/tomcat-embed-core-9.0.16.jar!/org/apache/catalina/core/ApplicationFilterChain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2398">
+          <caret line="131" column="2" selection-start-line="131" selection-start-column="2" selection-end-line="131" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoAlbumRelationMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/entity/Photo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/FaceMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -738,22 +763,108 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/externalAPI/Baidu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="184" column="79" selection-start-line="184" selection-start-column="79" selection-end-line="184" selection-end-column="79" />
+        <state relative-caret-position="3476">
+          <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+          <folding>
+            <element signature="e#3524#3525#0" expanded="true" />
+            <element signature="e#3564#3565#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/PhotoService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="70" lean-forward="true" selection-start-line="8" selection-start-column="70" selection-end-line="8" selection-end-column="70" />
+        <state relative-caret-position="968">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/controller/PhotoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4114">
+          <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tagMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/service/impl/PhotoServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="163" column="9" lean-forward="true" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="9" />
+        <state relative-caret-position="3762">
+          <caret line="752" column="18" selection-start-line="752" selection-start-column="18" selection-end-line="752" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;method#getFacePhotos#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#getAllLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+            <element signature="method#getAllLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#getLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+            <element signature="method#getLandmarkPhoto#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#getLandmarks#0;class#PhotoServiceImpl#0" />
+            <element signature="method#getLandmarks#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#upload#0;class#PhotoServiceImpl#0" />
+            <element signature="method#upload#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#uploads#0;class#PhotoServiceImpl#0" />
+            <element signature="method#uploads#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#download#0;class#PhotoServiceImpl#0" />
+            <element signature="method#download#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#downloads#0;class#PhotoServiceImpl#0" />
+            <element signature="method#downloads#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#moveToRecycleBin#0;class#PhotoServiceImpl#0" />
+            <element signature="method#moveToRecycleBin#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#edit#0;class#PhotoServiceImpl#0" />
+            <element signature="method#edit#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#show#0;class#PhotoServiceImpl#0" />
+            <element signature="method#show#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#showThumbnail#0;class#PhotoServiceImpl#0" />
+            <element signature="method#showThumbnail#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#getRecycleBinPhotos#0;class#PhotoServiceImpl#0" />
+            <element signature="method#getRecycleBinPhotos#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#move#0;class#PhotoServiceImpl#0" />
+            <element signature="method#move#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#moveOutRecycleBin#0;class#PhotoServiceImpl#0" />
+            <element signature="method#moveOutRecycleBin#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#completelyDelete#0;class#PhotoServiceImpl#0" />
+            <element signature="method#completelyDelete#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#globalSearch#0;class#PhotoServiceImpl#0" />
+            <element signature="method#globalSearch#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#like#0;class#PhotoServiceImpl#0" />
+            <element signature="method#like#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#personalSearch#0;class#PhotoServiceImpl#0" />
+            <element signature="method#personalSearch#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#timeline#0;class#PhotoServiceImpl#0" />
+            <element signature="method#timeline#0;class#PhotoServiceImpl#0" />
+            <element signature="docComment;method#recommend#0;class#PhotoServiceImpl#0" />
+            <element signature="method#recommend#0;class#PhotoServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/PhotoMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="16" column="117" selection-start-line="16" selection-start-column="117" selection-end-line="16" selection-end-column="117" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/zhitu/dao/mapper/TagMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/photoMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="73" selection-start-line="16" selection-start-column="73" selection-end-line="16" selection-end-column="73" />
         </state>
       </provider>
     </entry>

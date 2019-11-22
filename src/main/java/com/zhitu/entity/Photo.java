@@ -8,6 +8,8 @@ import java.sql.Timestamp;
  */
 public class Photo implements Serializable {
 
+    private String faceInfo; //人脸照片信息（非数据库映射字段）
+
     private int photoId;  //照片ID，数据库中主键，自增
 
     private String name;  //照片名
@@ -186,5 +188,12 @@ public class Photo implements Serializable {
 
     public void setDeleteTime(Timestamp deleteTime) {
         this.deleteTime = deleteTime;
+    }
+    public String getFaceInfo() {
+        return faceInfo;
+    }
+
+    public void setFaceInfo(String faceInfo) {
+        this.faceInfo = faceInfo;
     }
 }
